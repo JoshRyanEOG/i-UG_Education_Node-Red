@@ -1,0 +1,177 @@
+[
+    {
+        "id": "6426665b427fa315",
+        "type": "inject",
+        "z": "58d46b689e728ecd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 2620,
+        "wires": [
+            [
+                "a9a6cfda96683728"
+            ]
+        ]
+    },
+    {
+        "id": "67cd7d7c7f159ebf",
+        "type": "random",
+        "z": "58d46b689e728ecd",
+        "name": "",
+        "low": 1,
+        "high": "359",
+        "inte": "true",
+        "property": "payload",
+        "x": 660,
+        "y": 2620,
+        "wires": [
+            [
+                "38a21ce5371901e8",
+                "044b8a0f2b13a5f5"
+            ]
+        ]
+    },
+    {
+        "id": "38a21ce5371901e8",
+        "type": "function",
+        "z": "58d46b689e728ecd",
+        "name": "function 65",
+        "func": "let value = msg.payload\n\nmsg.payload = { \"on\": true, \"bri\": 100, \"hue\": (value) }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 2620,
+        "wires": [
+            [
+                "6dbf64f54f007a3b"
+            ]
+        ]
+    },
+    {
+        "id": "044b8a0f2b13a5f5",
+        "type": "debug",
+        "z": "58d46b689e728ecd",
+        "name": "debug 199",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 2680,
+        "wires": []
+    },
+    {
+        "id": "a9a6cfda96683728",
+        "type": "gate",
+        "z": "58d46b689e728ecd",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 450,
+        "y": 2620,
+        "wires": [
+            [
+                "67cd7d7c7f159ebf"
+            ]
+        ]
+    },
+    {
+        "id": "a4b43f3e74e327c7",
+        "type": "inject",
+        "z": "58d46b689e728ecd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 270,
+        "y": 2660,
+        "wires": [
+            [
+                "a9a6cfda96683728"
+            ]
+        ]
+    },
+    {
+        "id": "6dbf64f54f007a3b",
+        "type": "mqtt out",
+        "z": "58d46b689e728ecd",
+        "name": "",
+        "topic": "lightsensor",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "362b264118b762de",
+        "x": 1130,
+        "y": 2620,
+        "wires": [],
+        "icon": "node-red/light.svg"
+    },
+    {
+        "id": "362b264118b762de",
+        "type": "mqtt-broker",
+        "name": " xCYFgVEx-8wfhFXfn",
+        "broker": "node02.myqtthub.com",
+        "port": "1883",
+        "clientid": "mryan@eoguk.com",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
