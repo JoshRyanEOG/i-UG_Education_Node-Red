@@ -1,0 +1,171 @@
+[
+    {
+        "id": "be80b5f61a09e9b5",
+        "type": "function",
+        "z": "692b673989faf67c",
+        "name": "Extract Payload T",
+        "func": "let payload = msg.payload\nlet tempc =payload.data.temperature_c;\n//Console=('temperature', tempc)\n\nmsg.payload = tempc\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 1680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a0559fe7284052c3",
+        "type": "function",
+        "z": "692b673989faf67c",
+        "name": "Extract Payload H",
+        "func": "let payload = msg.payload\nlet tempc =payload.data.humidity;\n//Console=('temperature', tempc)\n\nmsg.payload = tempc\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 1620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "be91d98d6eb701a9",
+        "type": "gate",
+        "z": "692b673989faf67c",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 530,
+        "y": 1700,
+        "wires": [
+            [
+                "be80b5f61a09e9b5",
+                "a0559fe7284052c3"
+            ]
+        ]
+    },
+    {
+        "id": "3d8333cd020db322",
+        "type": "inject",
+        "z": "692b673989faf67c",
+        "name": "Toggle the Gate",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 300,
+        "y": 1780,
+        "wires": [
+            [
+                "be91d98d6eb701a9"
+            ]
+        ]
+    },
+    {
+        "id": "4662a8345c7b405f",
+        "type": "mqtt in",
+        "z": "692b673989faf67c",
+        "name": "",
+        "topic": "C4:4F:33:5B:4D:01",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "362b264118b762de",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 270,
+        "y": 1700,
+        "wires": [
+            [
+                "be91d98d6eb701a9"
+            ]
+        ]
+    },
+    {
+        "id": "1735fe41349750aa",
+        "type": "inject",
+        "z": "692b673989faf67c",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload.data.humidity",
+                "v": "55.3",
+                "vt": "str"
+            },
+            {
+                "p": "payload.data.temperature_c",
+                "v": "26.9",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 530,
+        "y": 1620,
+        "wires": [
+            [
+                "a0559fe7284052c3",
+                "be80b5f61a09e9b5"
+            ]
+        ]
+    },
+    {
+        "id": "362b264118b762de",
+        "type": "mqtt-broker",
+        "name": " xCYFgVEx-8wfhFXfn",
+        "broker": "node02.myqtthub.com",
+        "port": "1883",
+        "clientid": "mryan@eoguk.com",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
