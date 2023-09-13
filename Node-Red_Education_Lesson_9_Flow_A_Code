@@ -1,0 +1,190 @@
+[
+    {
+        "id": "40e91a50cf43fe97",
+        "type": "mqtt in",
+        "z": "4e3a42c6f02225c5",
+        "name": "",
+        "topic": "C4:4F:33:5B:4D:01",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "6cf4772fde90cfc6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "8f1ad0ec8f661913"
+            ]
+        ]
+    },
+    {
+        "id": "fb79e660cfec5c8b",
+        "type": "debug",
+        "z": "4e3a42c6f02225c5",
+        "name": "debug 140",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "7a94c30f5925f097",
+        "type": "function",
+        "z": "4e3a42c6f02225c5",
+        "name": "function 54",
+        "func": "let payload = msg.payload\nlet tempc =payload.data.temperature_c;\n//Console=('temperature', tempc)\n\nmsg.payload = tempc\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d5c2ec5c3cae8915",
+        "type": "debug",
+        "z": "4e3a42c6f02225c5",
+        "name": "debug 156",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1330,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "86d76b2ea7feb3dc",
+        "type": "function",
+        "z": "4e3a42c6f02225c5",
+        "name": "function 55",
+        "func": "let payload = msg.payload\nlet tempc =payload.data.humidity;\n//Console=('temperature', tempc)\n\nmsg.payload = tempc\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8f1ad0ec8f661913",
+        "type": "gate",
+        "z": "4e3a42c6f02225c5",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 310,
+        "y": 380,
+        "wires": [
+            [
+                "fb79e660cfec5c8b",
+                "7a94c30f5925f097",
+                "86d76b2ea7feb3dc",
+                "762afb6b4efbeb03"
+            ]
+        ]
+    },
+    {
+        "id": "8c6cd2cb692321c4",
+        "type": "inject",
+        "z": "4e3a42c6f02225c5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 130,
+        "y": 340,
+        "wires": [
+            [
+                "8f1ad0ec8f661913"
+            ]
+        ]
+    },
+    {
+        "id": "762afb6b4efbeb03",
+        "type": "function",
+        "z": "4e3a42c6f02225c5",
+        "name": "function 57",
+        "func": "let payload = msg.payload\nlet firm = msg.payload.info.firmware;\n//Console=('temperature', tempc)\n\nmsg.payload = firm\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 420,
+        "wires": [
+            [
+                "d5c2ec5c3cae8915"
+            ]
+        ]
+    },
+    {
+        "id": "6cf4772fde90cfc6",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "node02.myqtthub.com",
+        "port": "1883",
+        "clientid": "mryan@eoguk.com",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
