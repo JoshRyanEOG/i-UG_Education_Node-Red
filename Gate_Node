@@ -1,0 +1,22 @@
+[
+    {
+        "id": "877148f39c32ddb9",
+        "type": "gate",
+        "z": "572df6562a30cfcd",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 1190,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    }
+]
