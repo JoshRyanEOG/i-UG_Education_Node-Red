@@ -1,8 +1,8 @@
 [
     {
-        "id": "86cf929daf5cf734",
+        "id": "491caba710dec74c",
         "type": "inject",
-        "z": "58d46b689e728ecd",
+        "z": "f11218cf82891319",
         "name": "True Boolean (ON)",
         "props": [
             {
@@ -16,19 +16,19 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 230,
-        "y": 240,
+        "x": 170,
+        "y": 100,
         "wires": [
             [
-                "6c53585209bdde9f",
-                "f224e04046e617e0"
+                "98fce82f221b251b",
+                "470829d168ab61ff"
             ]
         ]
     },
     {
-        "id": "ab950b7d20827408",
+        "id": "906375ae6255984b",
         "type": "inject",
-        "z": "58d46b689e728ecd",
+        "z": "f11218cf82891319",
         "name": "False Boolean (OFF)",
         "props": [
             {
@@ -42,19 +42,19 @@
         "topic": "",
         "payload": "false",
         "payloadType": "bool",
-        "x": 240,
-        "y": 280,
+        "x": 180,
+        "y": 140,
         "wires": [
             [
-                "6c53585209bdde9f",
-                "f224e04046e617e0"
+                "98fce82f221b251b",
+                "470829d168ab61ff"
             ]
         ]
     },
     {
-        "id": "6c53585209bdde9f",
+        "id": "98fce82f221b251b",
         "type": "debug",
-        "z": "58d46b689e728ecd",
+        "z": "f11218cf82891319",
         "name": "debug 82",
         "active": true,
         "tosidebar": true,
@@ -64,16 +64,16 @@
         "targetType": "full",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 760,
-        "y": 300,
+        "x": 700,
+        "y": 160,
         "wires": []
     },
     {
-        "id": "f224e04046e617e0",
+        "id": "470829d168ab61ff",
         "type": "mqtt out",
-        "z": "58d46b689e728ecd",
+        "z": "f11218cf82891319",
         "name": "",
-        "topic": "lightsensor",
+        "topic": "lightsensor_01",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -81,34 +81,38 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "362b264118b762de",
-        "x": 770,
-        "y": 220,
+        "broker": "de887429d516dace",
+        "x": 720,
+        "y": 80,
         "wires": [],
         "icon": "node-red/light.svg"
     },
     {
-        "id": "362b264118b762de",
+        "id": "de887429d516dace",
         "type": "mqtt-broker",
-        "name": " xCYFgVEx-8wfhFXfn",
-        "broker": "node02.myqtthub.com",
+        "name": "",
+        "broker": "localhost",
         "port": "1883",
-        "clientid": "mryan@eoguk.com",
+        "clientid": "",
         "autoConnect": true,
         "usetls": false,
         "protocolVersion": "4",
         "keepalive": "60",
-        "cleansession": false,
+        "cleansession": true,
+        "autoUnsubscribe": true,
         "birthTopic": "",
         "birthQos": "0",
+        "birthRetain": "false",
         "birthPayload": "",
         "birthMsg": {},
         "closeTopic": "",
         "closeQos": "0",
+        "closeRetain": "false",
         "closePayload": "",
         "closeMsg": {},
         "willTopic": "",
         "willQos": "0",
+        "willRetain": "false",
         "willPayload": "",
         "willMsg": {},
         "userProps": "",
