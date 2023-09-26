@@ -1,8 +1,8 @@
 [
     {
-        "id": "599c117e23299aa5",
+        "id": "ef71064d595e39a1",
         "type": "function",
-        "z": "692b673989faf67c",
+        "z": "0af65cac5abf68ba",
         "name": "Set INSERT SQL for Cust. Order Address",
         "func": "// Bring in the payload and place into variables for this process\n\nlet order  =  msg.payload.FODORNO\nlet cuname =  msg.payload.FODCUNM\nlet addr1 = msg.payload.FODCUA1\nlet addr2 = msg.payload.FODCUA2\nlet addr3 = msg.payload.FODCUA3\nlet addr4 = msg.payload.FODCUA4\nlet pono = msg.payload.FODPONO\nlet phone = msg.payload.FODPHNO\n\nconsole.log(\"order\", order)\nconsole.log(\"CUST\", cuname)\n\n// Build the SQL statement, only SET the column if the value from the Forms Node is NOT null/blank\n\nlet payloadout = `insert into iugred.cusordadd (ODORNO, ODCUNM, ODCUA1, ODCUA2,  ODCUA3, ODCUA4, ODPONO, ODPHNO) \nVALUES ('${order}', '${cuname}', '${addr1}', '${addr2}', '${addr3}', '${addr4}', '${pono}', '${phone}' )`\n\n//  Store the SQL statement in the msg.payload   , when '${addr1}' > ' ' then set ODADR1 = '${addr1}';\n\nmsg.payload = payloadout\n\nreturn msg;",
         "outputs": 1,
@@ -10,32 +10,19 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
-        "y": 3000,
+        "x": 620,
+        "y": 540,
         "wires": [
             [
-                "47c79789c8421408",
-                "52bb68d5e53532c1"
+                "f1cd5cab5f49bb56",
+                "461860ff8b829620"
             ]
         ]
     },
     {
-        "id": "47c79789c8421408",
-        "type": "DB2 for i",
-        "z": "692b673989faf67c",
-        "mydb": "c783136d02b66193",
-        "name": "",
-        "arraymode": true,
-        "x": 880,
-        "y": 3000,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "52bb68d5e53532c1",
+        "id": "461860ff8b829620",
         "type": "debug",
-        "z": "692b673989faf67c",
+        "z": "0af65cac5abf68ba",
         "name": "debug 209",
         "active": true,
         "tosidebar": true,
@@ -45,17 +32,34 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 910,
-        "y": 3060,
+        "x": 930,
+        "y": 600,
         "wires": []
     },
     {
-        "id": "a4a092ed08e275b0",
+        "id": "e1f112d9f4109a13",
+        "type": "catch",
+        "z": "0af65cac5abf68ba",
+        "name": "Catch Duplicates",
+        "scope": [
+            "f1cd5cab5f49bb56"
+        ],
+        "uncaught": false,
+        "x": 520,
+        "y": 640,
+        "wires": [
+            [
+                "1167ed2319c2013c"
+            ]
+        ]
+    },
+    {
+        "id": "769fe85715fa8b3a",
         "type": "ui_form",
-        "z": "692b673989faf67c",
+        "z": "0af65cac5abf68ba",
         "name": "",
         "label": "",
-        "group": "25a1df44e33ab0fa",
+        "group": "20b37f0ec7979bd4",
         "order": 1,
         "width": 0,
         "height": 0,
@@ -134,35 +138,18 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 170,
-        "y": 3000,
+        "x": 190,
+        "y": 540,
         "wires": [
             [
-                "599c117e23299aa5"
+                "ef71064d595e39a1"
             ]
         ]
     },
     {
-        "id": "8b043d9c2b8b1e36",
-        "type": "catch",
-        "z": "692b673989faf67c",
-        "name": "Catch Duplicates",
-        "scope": [
-            "47c79789c8421408"
-        ],
-        "uncaught": false,
-        "x": 500,
-        "y": 3100,
-        "wires": [
-            [
-                "b1034fcbb4905959"
-            ]
-        ]
-    },
-    {
-        "id": "b1034fcbb4905959",
+        "id": "1167ed2319c2013c",
         "type": "ui_toast",
-        "z": "692b673989faf67c",
+        "z": "0af65cac5abf68ba",
         "position": "dialog",
         "displayTime": "20",
         "highlight": "RED",
@@ -174,11 +161,35 @@
         "className": "",
         "topic": "",
         "name": "Advise if Duplicates",
-        "x": 790,
-        "y": 3140,
+        "x": 810,
+        "y": 680,
         "wires": [
             []
         ]
+    },
+    {
+        "id": "f1cd5cab5f49bb56",
+        "type": "DB2 for i",
+        "z": "0af65cac5abf68ba",
+        "mydb": "c783136d02b66193",
+        "name": "",
+        "arraymode": true,
+        "x": 900,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "20b37f0ec7979bd4",
+        "type": "ui_group",
+        "name": "Orders",
+        "tab": "d9f6bdd78416d845",
+        "order": 2,
+        "disp": true,
+        "width": 13,
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "c783136d02b66193",
@@ -188,20 +199,9 @@
         "keepalive": true
     },
     {
-        "id": "25a1df44e33ab0fa",
-        "type": "ui_group",
-        "name": "Add a Row",
-        "tab": "c825ca5ed8e8f9a6",
-        "order": 3,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "c825ca5ed8e8f9a6",
+        "id": "d9f6bdd78416d845",
         "type": "ui_tab",
-        "name": "INSERT DB",
+        "name": "Table Output",
         "icon": "dashboard",
         "disabled": false,
         "hidden": false
