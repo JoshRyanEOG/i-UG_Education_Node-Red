@@ -1,8 +1,8 @@
 [
     {
-        "id": "72f42d3a1cd5fb02",
+        "id": "4ee389fd8943a9e2",
         "type": "mqtt in",
-        "z": "5aed8d3eba2a1bbf",
+        "z": "eb0be36322ed10f6",
         "name": "",
         "topic": "testtopic/1",
         "qos": "0",
@@ -12,19 +12,18 @@
         "rap": false,
         "rh": 0,
         "inputs": 0,
-        "x": 160,
-        "y": 240,
+        "x": 200,
+        "y": 620,
         "wires": [
             [
-                "da5600233aefa7db",
-                "34ac9a311c15a890"
+                "10791032a2598527"
             ]
         ]
     },
     {
-        "id": "30acc5872f54be31",
+        "id": "588f52877da198c4",
         "type": "function",
-        "z": "5aed8d3eba2a1bbf",
+        "z": "eb0be36322ed10f6",
         "name": "Extract Payload T",
         "func": "let payload = msg.payload\nlet tempc =payload.data.temperature_c;\n//Console=('temperature', tempc)\n\nmsg.payload = tempc\nreturn msg;",
         "outputs": 1,
@@ -32,19 +31,18 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 530,
-        "y": 240,
+        "x": 570,
+        "y": 620,
         "wires": [
             [
-                "eece78b0c596931e",
-                "6f98c57e0d3f7679"
+                "7b04a0757115993f"
             ]
         ]
     },
     {
-        "id": "a3974a510cba3e8b",
+        "id": "c7e763856b89ad76",
         "type": "function",
-        "z": "5aed8d3eba2a1bbf",
+        "z": "eb0be36322ed10f6",
         "name": "Extract Payload H",
         "func": "let payload = msg.payload\nlet tempc =payload.data.humidity;\n//Console=('temperature', tempc)\n\nmsg.payload = tempc\nreturn msg;",
         "outputs": 1,
@@ -52,18 +50,57 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 530,
-        "y": 180,
+        "x": 570,
+        "y": 560,
         "wires": [
             [
-                "24cb7619789d8b17"
+                "8fa8fa919a74226d"
             ]
         ]
     },
     {
-        "id": "24cb7619789d8b17",
+        "id": "0d74a25987503b05",
+        "type": "inject",
+        "z": "eb0be36322ed10f6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 150,
+        "y": 540,
+        "wires": [
+            [
+                "10791032a2598527"
+            ]
+        ]
+    },
+    {
+        "id": "6b9f3ea7ba1e8ccf",
+        "type": "comment",
+        "z": "eb0be36322ed10f6",
+        "name": "Record Temp and Humidity on Gauge.  Warn if too high, reassure when temp drops",
+        "info": "",
+        "x": 410,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "8fa8fa919a74226d",
         "type": "ui_gauge",
-        "z": "5aed8d3eba2a1bbf",
+        "z": "eb0be36322ed10f6",
         "name": "",
         "group": "cb2867459c8e3cc6",
         "order": 6,
@@ -83,67 +120,15 @@
         "seg1": "",
         "seg2": "",
         "className": "",
-        "x": 940,
-        "y": 180,
+        "x": 980,
+        "y": 560,
         "wires": []
     },
     {
-        "id": "da5600233aefa7db",
-        "type": "gate",
-        "z": "5aed8d3eba2a1bbf",
-        "name": "",
-        "controlTopic": "control",
-        "defaultState": "closed",
-        "openCmd": "open",
-        "closeCmd": "close",
-        "toggleCmd": "toggle",
-        "defaultCmd": "default",
-        "statusCmd": "status",
-        "persist": false,
-        "storeName": "memory",
-        "x": 330,
-        "y": 240,
-        "wires": [
-            [
-                "30acc5872f54be31",
-                "a3974a510cba3e8b"
-            ]
-        ]
-    },
-    {
-        "id": "fdd94a21a0dbabf8",
-        "type": "inject",
-        "z": "5aed8d3eba2a1bbf",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "control",
-        "payload": "toggle",
-        "payloadType": "str",
-        "x": 110,
-        "y": 160,
-        "wires": [
-            [
-                "da5600233aefa7db"
-            ]
-        ]
-    },
-    {
-        "id": "6f98c57e0d3f7679",
+        "id": "7b04a0757115993f",
         "type": "ui_gauge",
-        "z": "5aed8d3eba2a1bbf",
-        "name": "",
+        "z": "eb0be36322ed10f6",
+        "name": "Temp 4",
         "group": "cb2867459c8e3cc6",
         "order": 4,
         "width": 0,
@@ -161,20 +146,34 @@
         ],
         "seg1": "",
         "seg2": "",
+        "diff": false,
         "className": "",
-        "x": 950,
-        "y": 240,
+        "x": 980,
+        "y": 620,
         "wires": []
     },
     {
-        "id": "838f3c9927d00e20",
-        "type": "comment",
-        "z": "5aed8d3eba2a1bbf",
-        "name": "Record Temp and Humidity on Gauge.  Warn if too high, reassure when temp drops",
-        "info": "",
+        "id": "10791032a2598527",
+        "type": "gate",
+        "z": "eb0be36322ed10f6",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
         "x": 370,
-        "y": 100,
-        "wires": []
+        "y": 620,
+        "wires": [
+            [
+                "588f52877da198c4",
+                "c7e763856b89ad76"
+            ]
+        ]
     },
     {
         "id": "4d0adc15ffb8189f",
@@ -189,6 +188,7 @@
         "protocolVersion": "5",
         "keepalive": "60",
         "cleansession": true,
+        "autoUnsubscribe": true,
         "birthTopic": "hellllo",
         "birthQos": "0",
         "birthPayload": "",
